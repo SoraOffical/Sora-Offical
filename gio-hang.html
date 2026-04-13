@@ -119,8 +119,10 @@
             cart.forEach((item, index) => {
                 html += `
                 <div class="cart-item">
-                    <div class="item-img-placeholder">[ Ảnh ${item.img} ]</div>
-                    <div class="item-details">
+<div class="item-img-placeholder" style="background-color: transparent; padding: 0;">
+    <img src="${item.img}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
+</div>
+<div class="item-details">
                         <div class="item-name">${item.name}</div>
                         <div class="item-price">${formatMoney(item.price)}</div>
                         <button class="remove-btn" onclick="removeItem(${index})">Xóa khỏi giỏ</button>
