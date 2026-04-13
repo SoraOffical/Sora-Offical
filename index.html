@@ -244,16 +244,22 @@
             transform: translateY(-5px);
         }
 
+       
         .product-image {
             width: 100%;
-            height: 300px;
-            background-color: #fff;
-            border-radius: 8px;
+            height: 300px; /* Giữ chiều cao cố định để các khung sản phẩm đều nhau */
             margin-bottom: 30px;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--text-gray);
+            justify-content: center; /* Căn giữa ảnh theo chiều ngang */
+            align-items: center;    /* Căn giữa ảnh theo chiều dọc */
+            overflow: hidden;       /* Ẩn phần ảnh thừa nếu quá lớn */
+            border-radius: 8px;
+        }
+
+        .product-image img {
+            max-width: 100%;  /* Ảnh không vượt quá chiều ngang khung */
+            max-height: 100%; /* Ảnh không vượt quá chiều dọc khung */
+            object-fit: contain; /* Giữ nguyên tỷ lệ ảnh, hiển thị toàn bộ tấm ảnh */
         }
 
         .product-card h3 {
@@ -365,9 +371,9 @@
         </div>
         <div class="product-grid">
             <div class="product-card">
-                <div class="product-image">
-                    [ Hình ảnh SilkFusion màu Vàng Hồng/Trắng ]
-                </div>
+               <div class="product-image">
+    <img src="sora thường.png" alt="Sora SilkFusion">
+</div>
                 <h3>Sora SilkFusion</h3>
                 <p class="product-price">1.890.000 ₫</p>
                 <p style="margin-bottom: 30px; font-size: 14px; color: var(--text-gray);">Dành cho tóc thường. Sấy và dưỡng ẩm hàng ngày.</p>
@@ -376,8 +382,8 @@
 
             <div class="product-card">
                 <div class="product-image">
-                    [ Hình ảnh SilkFusion Pro màu Xanh Ngọc/Xám ]
-                </div>
+    <img src="sora pro.png" alt="Sora SilkFusion Pro">
+</div>
                 <h3>Sora SilkFusion Pro</h3>
                 <p class="product-price">2.190.000 ₫</p>
                 <p style="margin-bottom: 30px; font-size: 14px; color: var(--text-gray);">Dành cho tóc hóa chất, tẩy nhuộm. Phục hồi chuyên sâu.</p>
