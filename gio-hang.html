@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng của bạn - Sora Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-pastel-pink: #FDF5F6; --bg-white: #FFFFFF; --text-dark: #1D1D1F;
+            --text-gray: #86868B; --accent-pink: #E8B4B8; --button-dark: #1D1D1F;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-pastel-pink); color: var(--text-dark); line-height: 1.6; }
+        
+        /* Header */
+        header { background-color: rgba(253, 245, 246, 0.9); backdrop-filter: blur(10px); position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .nav-container { max-width: 1400px; margin: 0 auto; padding: 0 40px; height: 60px; display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 50px; width: auto; object-fit: contain; }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-size: 14px; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--accent-pink); }
+
+        /* Cart Layout */
+        .cart-section { padding: 150px 40px 100px; max-width: 1000px; margin: 0 auto; min-height: 70vh;}
+        .cart-title { font-size: 2.5rem; margin-bottom: 40px; font-weight: 500;}
+        
+        .cart-container { display: flex; gap: 40px; }
+        @media (max-width: 768px) { .cart-container { flex-direction: column; } }
+        
+        .cart-items-wrapper { flex: 2; }
+        .cart-item { display: flex; align-items: center; background: var(--bg-white); padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+        .item-img-placeholder { width: 100px; height: 100px; background-color: #f7e8ea; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--text-gray); text-align: center; padding: 10px; margin-right: 20px; }
+        .item-details { flex: 1; }
+        .item-name { font-size: 1.2rem; font-weight: 500; margin-bottom: 5px; }
+        .item-price { color: var(--text-gray); font-size: 1.1rem; }
+        .remove-btn { background: none; border: none; color: #ff4d4f; cursor: pointer; font-size: 14px; margin-top: 10px; text-decoration: underline; }
+        
+        .cart-summary { flex: 1; background: var(--bg-white); padding: 30px; border-radius: 12px; height: fit-content; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 15px; color: var(--text-gray); }
+        .summary-total { display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; font-size: 1.5rem; font-weight: 600; color: var(--text-dark); }
+        
+        .btn { display: block; width: 100%; text-align: center; padding: 16px; background-color: var(--button-dark); color: #fff; text-decoration: none; border-radius: 4px; font-weight: 500; margin-top: 30px; border: 1px solid var(--button-dark); cursor: pointer;}
+        .btn:hover { background-color: transparent; color: var(--button-dark); }
+        .empty-cart { text-align: center; padding: 50px; background: white; border-radius: 12px; color: var(--text-gray); }
+
+        footer { background: var(--text-dark); color: white; padding: 60px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo"><img src="sora_logo1-removebg-preview.png" alt="Sora"></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Tiếp tục mua sắm</a></li>
+            </ul>
+            <div style="font-size: 14px; font-weight: 500;" id="header-cart-count">Giỏ hàng (0)</div>
+        </div>
+    </header>
+
+    <section class="cart-section">
+        <h1 class="cart-title">Giỏ hàng</h1>
+        
+        <div class="cart-container">
+            <div class="cart-items-wrapper" id="cart-list">
+                </div>
+            
+            <div class="cart-summary">
+                <h3 style="margin-bottom: 20px;">Tóm tắt đơn hàng</h3>
+                <div class="summary-row">
+                    <span>Tạm tính</span>
+                    <span id="subtotal">0 ₫</span>
+                </div>
+                <div class="summary-row">
+                    <span>Vận chuyển</span>
+                    <span>Miễn phí</span>
+                </div>
+                <div class="summary-total">
+                    <span>Tổng cộng</span>
+                    <span id="total-price">0 ₫</span>
+                </div>
+                <button class="btn">Thanh toán an toàn</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p style="font-size: 12px; color: #888;">© 2026 Sora Beauty Technology. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function formatMoney(amount) {
+            return Number(amount).toLocaleString('vi-VN') + ' ₫';
+        }
+
+        function renderCart() {
+            let cart = JSON.parse(localStorage.getItem('sora_cart')) || [];
+            let cartList = document.getElementById('cart-list');
+            let subtotalEl = document.getElementById('subtotal');
+            let totalEl = document.getElementById('total-price');
+            
+            document.getElementById('header-cart-count').innerText = `Giỏ hàng (${cart.length})`;
+
+            if (cart.length === 0) {
+                cartList.innerHTML = `
+                    <div class="empty-cart">
+                        <p style="margin-bottom: 20px;">Giỏ hàng của bạn đang trống.</p>
+                        <a href="index.html" style="color: var(--accent-pink); text-decoration: underline;">Quay lại cửa hàng</a>
+                    </div>`;
+                subtotalEl.innerText = '0 ₫';
+                totalEl.innerText = '0 ₫';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                html += `
+                <div class="cart-item">
+                    <div class="item-img-placeholder">[ Ảnh ${item.img} ]</div>
+                    <div class="item-details">
+                        <div class="item-name">${item.name}</div>
+                        <div class="item-price">${formatMoney(item.price)}</div>
+                        <button class="remove-btn" onclick="removeItem(${index})">Xóa khỏi giỏ</button>
+                    </div>
+                </div>`;
+                total += Number(item.price);
+            });
+
+            cartList.innerHTML = html;
+            subtotalEl.innerText = formatMoney(total);
+            totalEl.innerText = formatMoney(total);
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem('sora_cart')) || [];
+            cart.splice(index, 1); // Xóa 1 phần tử tại vị trí index
+            localStorage.setItem('sora_cart', JSON.stringify(cart));
+            renderCart(); // Cập nhật lại giao diện
+        }
+
+        // Chạy hàm render khi vừa mở trang
+        renderCart();
+    </script>
+</body>
+</html>
