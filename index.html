@@ -360,7 +360,116 @@
             <p>Không chỉ là sấy khô. Hệ thống siêu âm chuyển hóa tinh chất serum thành màn sương siêu mịn, thẩm thấu trực tiếp vào biểu bì tóc trong quá trình sấy, thay thế hoàn toàn các bước dưỡng thủ công.</p>
         </div>
         <div class="tech-image">
-            [ Ảnh cận cảnh dải sương nano phun ra từ máy sấy xen lẫn mái tóc ]
+            <section class="reveal mist-closeup-section">
+    <div class="mist-closeup-container">
+        
+        <img src="sora-mist-closeup.jpg" alt="Cận cảnh máy sấy Sora phun sương lên tóc" class="mist-base-image">
+        
+        <div class="mist-overlay-core"></div> <div class="mist-overlay-diffused"></div> </div>
+</section>
+
+<style>
+    /* 1. Thiết lập khung chứa ảnh */
+    .mist-closeup-section {
+        padding: 80px 40px;
+        background-color: var(--bg-white);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .mist-closeup-container {
+        position: relative;
+        width: 100%;
+        max-width: 900px; /* Độ rộng tối đa của ảnh */
+        border-radius: 20px;
+        overflow: hidden; /* Giữ hiệu ứng bên trong khung ảnh */
+        box-shadow: 0 15px 40px rgba(0,0,0,0.03);
+        background-color: var(--bg-pastel-pink); /* Placeholder màu hồng nhẹ */
+    }
+
+    /* 2. Thiết lập ảnh gốc */
+    .mist-base-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.5s ease; /* Hiệu ứng zoom nhẹ ảnh nền */
+    }
+
+    /* Zoom nhẹ ảnh nền khi di chuột vào */
+    .mist-closeup-container:hover .mist-base-image {
+        transform: scale(1.02);
+    }
+
+    /* 3. Thiết lập các lớp phủ sương (Bắt đầu là ẩn) */
+    [class^="mist-overlay"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0; /* Ẩn ban đầu */
+        transition: opacity 0.3s ease-out;
+        pointer-events: none; /* Cho phép click xuyên qua lớp sương */
+    }
+
+    /* 4. Định nghĩa Lõi sương đậm (Màu hồng đậm, mờ) */
+    .mist-overlay-core {
+        background: radial-gradient(circle at 70% 50%, rgba(232, 180, 184, 0.6) 0%, rgba(253, 245, 246, 0) 50%);
+        filter: blur(10px);
+    }
+
+    /* 5. Định nghĩa Sương khuếch tán rộng (Màu trắng/hồng nhạt, cực mờ) */
+    .mist-overlay-diffused {
+        background: radial-gradient(circle at 70% 50%, rgba(255, 255, 255, 0.4) 0%, rgba(253, 245, 246, 0) 70%);
+        filter: blur(30px);
+    }
+
+    /* 6. HIỆU ỨNG KHI DI CHUỘT VÀO: Hiện sương và chạy hoạt ảnh */
+    .mist-closeup-container:hover .mist-overlay-core {
+        opacity: 1;
+        animation: mist-core-spray 2s ease-out infinite; /* Hoạt ảnh lõi */
+    }
+
+    .mist-closeup-container:hover .mist-overlay-diffused {
+        opacity: 1;
+        animation: mist-diffused-spray 3s ease-out infinite; /* Hoạt ảnh khuếch tán */
+    }
+
+    /* 7. Định nghĩa HOẠT ẢNH phun sương (Sử dụng Keyframes) */
+    
+    /* Hoạt ảnh lõi sương: Co giãn và di chuyển nhẹ lên trên */
+    @keyframes mist-core-spray {
+        0% {
+            transform: scale(0.9) translateY(0px);
+            opacity: 0.2;
+        }
+        50% {
+            transform: scale(1.0) translateY(-10px);
+            opacity: 0.6;
+        }
+        100% {
+            transform: scale(1.1) translateY(-20px);
+            opacity: 0;
+        }
+    }
+
+    /* Hoạt ảnh sương khuếch tán: Co giãn rộng hơn và di chuyển lên nhiều hơn */
+    @keyframes mist-diffused-spray {
+        0% {
+            transform: scale(0.8) translateY(0px);
+            opacity: 0.1;
+        }
+        50% {
+            transform: scale(1.1) translateY(-20px);
+            opacity: 0.4;
+        }
+        100% {
+            transform: scale(1.3) translateY(-40px);
+            opacity: 0;
+        }
+    }
+</style>
         </div>
     </section>
 
