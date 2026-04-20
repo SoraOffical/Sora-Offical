@@ -156,13 +156,18 @@
         }
 
     .tech-image {
-    width: 90%; /* Không chiếm 100% nữa, chừa khoảng trống 2 bên */
-    max-width: 900px; /* Khống chế độ to tối đa */
-    height: auto;
-    margin: 0 auto 40px auto; /* Căn giữa màn hình và cách dưới 40px */
-    border-radius: 24px; /* Bo góc cực to giống ảnh của bạn */
-    overflow: hidden; /* Quan trọng: Ép video bên trong phải cong theo góc bo này */
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1); /* Thêm một chút bóng mờ để khung video nổi bần bật lên */
+    width: 90%; 
+    max-width: 900px;
+    margin: 0 auto 40px auto; 
+    /* Thay đổi: Dùng màu trắng tiệp với màu nền của video vân đá */
+    background-color: #ffffff; 
+    border-radius: 24px; 
+    overflow: hidden; 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+    /* Thay đổi: Giúp khung tự co giãn vừa khít theo video */
+    height: auto; 
+    line-height: 0; 
+    display: block;
 }
 
         /* Technology Split Section (Khối công nghệ) */
@@ -336,7 +341,7 @@
             </div>
         <div class="hero-image">
             <div class="tech-image">
- <video src="sora-3d.mp4" autoplay loop muted playsinline style="width: 100%; height: auto; display: block;">
+ <video src="sora-3d.mp4" autoplay loop muted playsinline style="width: 100%; height: auto; display: block; object-fit: contain;">
 </video>
         </div>
     </section>
