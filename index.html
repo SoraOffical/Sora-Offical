@@ -128,13 +128,14 @@
 
         /* Hero Section (Vùng đập vào mắt đầu tiên) */
         .hero {
-            padding-top: 120px; /* Bù cho fixed header */
-            text-align: center;
-            min-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-                   }
+    padding-top: 120px;
+    text-align: center;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FDF5F6; /* Màu hồng pastel nhẹ nhàng */
+}
 
         .hero-content {
             max-width: 800px;
@@ -154,15 +155,15 @@
             margin-bottom: 30px;
         }
 
-        .tech-image {
-    width: 100%;
-    height: auto; /* Giữ nguyên chiều cao cố định */
-    background-color: transparent;     margin-bottom: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-           }
+    .tech-image {
+    width: 90%; /* Không chiếm 100% nữa, chừa khoảng trống 2 bên */
+    max-width: 900px; /* Khống chế độ to tối đa */
+    height: auto;
+    margin: 0 auto 40px auto; /* Căn giữa màn hình và cách dưới 40px */
+    border-radius: 24px; /* Bo góc cực to giống ảnh của bạn */
+    overflow: hidden; /* Quan trọng: Ép video bên trong phải cong theo góc bo này */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1); /* Thêm một chút bóng mờ để khung video nổi bần bật lên */
+}
 
         /* Technology Split Section (Khối công nghệ) */
         .tech-split {
@@ -335,7 +336,7 @@
             </div>
         <div class="hero-image">
             <div class="tech-image">
-  <video src="sora-3d.mp4" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: contain;">
+ <video src="sora-3d.mp4" autoplay loop muted playsinline style="width: 100%; height: auto; display: block;">
 </video>
         </div>
     </section>
