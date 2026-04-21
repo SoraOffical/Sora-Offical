@@ -176,9 +176,17 @@
 }
 /* Cột chứa chữ */
 .tech-split .tech-text {
-    flex: 1; /* Cho phép cột chữ giãn ra chiếm 1 nửa */
+    flex: 1;
+    min-width: 400px; /* THÊM DÒNG NÀY: Ép cái cột chữ phải rộng ít nhất 400px */
+    padding-right: 40px; /* Thêm một chút lề phải để chữ không dính sát vào ảnh */
 }
 
+/* Tiện tay chỉnh lại cái tiêu đề cho đẹp luôn */
+.tech-split .tech-text h2 {
+    font-size: 2.5rem; /* Bạn có thể giảm số này xuống (vd: 2rem) nếu chữ vẫn quá to */
+    line-height: 1.2;
+    white-space: normal; /* Ép chữ dàn ngang tự nhiên */
+}
 /* Cột chứa ảnh */
 .tech-split .feature-pic {
     flex: 1;
