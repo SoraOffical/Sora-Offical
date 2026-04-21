@@ -181,18 +181,34 @@
 
 /* Cột chứa ảnh */
 .tech-split .feature-pic {
-    flex: 1; /* Cho phép cột ảnh chiếm 1 nửa còn lại */
-    text-align: center; /* Đảm bảo ảnh nằm giữa cái cột của nó */
+    flex: 1;
+    height: 450px; /* Độ cao của "cửa sổ" xem ảnh */
+    overflow: hidden; /* CỰC KỲ QUAN TRỌNG: Để cắt bỏ những phần ảnh dư sau khi phóng to */
+    border-radius: 24px;
+    background-color: transparent;
+    display: block;
 }
 
-/* Bo góc và làm nổi bật hình ảnh */
 .tech-split .feature-pic img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 20px; /* Bo góc ảnh cho mềm mại */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Đổ bóng nhẹ */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Đảm bảo ảnh luôn lấp đầy khung */
+    
+    /* BƯỚC PHÓNG TO: */
+    transform: scale(1.8); /* Phóng to 1.8 lần. Bạn có thể tăng lên 2.0 nếu muốn to nữa */
+    
+    /* BƯỚC CHỌN ĐIỂM CẦN GIỮ: 
+       Số đầu (20%) là vị trí ngang (càng nhỏ càng lệch trái). 
+       Số sau (50%) là vị trí dọc. */
+    transform-origin: 20% 50%; 
+    
+    transition: transform 0.5s ease; /* Thêm hiệu ứng mượt mà khi di chuột vào */
 }
 
+/* Hiệu ứng khi khách hàng rà chuột vào: ảnh hơi nhúc nhích tạo cảm giác cao cấp */
+.tech-split .feature-pic:hover img {
+    transform: scale(1.9) translateX(10px);
+}
         .tech-split:nth-child(even) {
             flex-direction: row-reverse;
             background-color: var(--bg-pastel-pink);
