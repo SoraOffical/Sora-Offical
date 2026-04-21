@@ -6,6 +6,99 @@
     <title>Giỏ hàng của bạn - Sora Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+/* Nền mờ đen phía sau Popup */
+.modal {
+    display: none; /* Ẩn mặc định */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hộp thoại màu trắng ở giữa */
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    animation: fadeIn 0.3s ease; /* Hiệu ứng trượt nhẹ lên */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Nút Tắt (X) */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #999;
+}
+.close-btn:hover { color: #333; }
+
+/* Trang trí các ô nhập liệu (Input) */
+.input-group { margin-bottom: 15px; }
+.input-group input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box; /* Chống tràn khung */
+    font-size: 15px;
+}
+.input-group input:focus {
+    outline: none;
+    border-color: #333;
+}
+
+/* Nút Xác nhận đen */
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.submit-btn:hover { background-color: #333; }
+
+/* Giao diện Thành công */
+.success-icon {
+    font-size: 70px;
+    color: white;
+    background-color: #4CAF50; /* Xanh lá */
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 20px auto;
+}
+.back-home-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: #FDF5F6; /* Màu hồng Sora */
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
         :root {
             --bg-pastel-pink: #FDF5F6; --bg-white: #FFFFFF; --text-dark: #1D1D1F;
             --text-gray: #86868B; --accent-pink: #E8B4B8; --button-dark: #1D1D1F;
@@ -80,7 +173,7 @@
                     <span>Tổng cộng</span>
                     <span id="total-price">0 ₫</span>
                 </div>
-                <button class="btn">Thanh toán an toàn</button>
+                <button class="nut-thanh-toan" id="openCheckoutBtn">Thanh toán an toàn</button>
             </div>
         </div>
     </section>
@@ -146,5 +239,73 @@
         // Chạy hàm render khi vừa mở trang
         renderCart();
     </script>
+<div id="checkoutModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span> <div id="checkoutFormContainer">
+            <h2 style="text-align: center; margin-bottom: 20px;">Thông tin giao hàng</h2>
+            <form id="checkoutForm">
+                <div class="input-group">
+                    <input type="text" id="fullname" placeholder="Họ và tên" required>
+                </div>
+                <div class="input-group">
+                    <input type="tel" id="phone" placeholder="Số điện thoại" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="address" placeholder="Địa chỉ giao hàng chi tiết" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="promo" placeholder="Mã khuyến mãi (nếu có)">
+                </div>
+                <button type="submit" class="submit-btn">Xác nhận đặt hàng</button>
+            </form>
+        </div>
+
+        <div id="successMessage" style="display: none; text-align: center;">
+            <div class="success-icon">✓</div>
+            <h2 style="color: #4CAF50;">Đặt hàng thành công!</h2>
+            <p style="color: #666;">Cảm ơn bạn đã mua sắm. Chúng tôi sẽ sớm liên hệ để giao hàng.</p>
+            <button class="back-home-btn" onclick="window.location.href='index.html'">Về trang chủ</button>
+        </div>
+<script>
+    // 1. Khai báo các thành phần
+    const modal = document.getElementById("checkoutModal");
+    const openBtn = document.getElementById("openCheckoutBtn");
+    const closeBtn = document.querySelector(".close-btn");
+    const form = document.getElementById("checkoutForm");
+    const formContainer = document.getElementById("checkoutFormContainer");
+    const successMessage = document.getElementById("successMessage");
+
+    // 2. Mở popup khi bấm nút "Thanh toán an toàn"
+    openBtn.onclick = function() {
+        modal.style.display = "flex"; // Đổi thành flex để popup canh giữa màn hình
+    }
+
+    // 3. Đóng popup khi bấm nút X
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // 4. Đóng popup khi bấm ra ngoài khoảng đen
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // 5. Xử lý khi bấm nút "Xác nhận đặt hàng"
+    form.onsubmit = function(event) {
+        event.preventDefault(); // Ngăn trình duyệt load lại trang
+
+        // Ẩn form đi
+        formContainer.style.display = "none";
+        // Hiện dấu tích xanh thành công lên
+        successMessage.style.display = "block";
+    }
+</script>
+    </div>
+</div>
 </body>
 </html>
