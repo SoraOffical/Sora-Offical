@@ -174,23 +174,30 @@
     margin: 80px auto; /* Căn giữa trang web */
     padding: 0 40px; /* Thêm một chút lề 2 bên cho khỏi sát viền màn hình */
 }
-/* Ép cột chữ phải chiếm hơn 1 nửa màn hình và cấm không được thu hẹp */
+/* Khung chứa chữ */
 .tech-split .tech-text {
-    flex: 1 1 55% !important; /* Ép chiếm 55% không gian màn hình */
-    min-width: 450px !important; /* Cấm không cho nhỏ hơn 450px */
-    padding-right: 40px;
+    flex: 1; /* Chiếm 1 nửa màn hình bên trái */
+    padding-right: 40px; /* Cách bức ảnh bên phải ra 1 chút */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-/* Đảm bảo ảnh chỉ chiếm 45% còn lại, không được lấn lướt chữ */
-.tech-split .feature-pic {
-    flex: 1 1 45% !important; 
+/* Tinh chỉnh Tiêu đề to (Heading) */
+.tech-split .tech-text h2 {
+    font-size: 2.8rem; /* Chữ to và rõ */
+    line-height: 1.3; /* Khoảng cách giữa 2 dòng tiêu đề rộng rãi */
+    margin-bottom: 20px; /* Đẩy đoạn văn nhỏ xuống dưới 1 chút */
+    color: #222; /* Màu đen xám sang trọng */
+    font-weight: 600; /* In đậm vừa phải */
 }
 
-/* Xóa bỏ mọi giới hạn chiều rộng ngầm của chữ (nếu có) */
-.tech-split .tech-text h2, 
+/* Tinh chỉnh Đoạn văn nhỏ (Paragraph) */
 .tech-split .tech-text p {
-    max-width: 100% !important; /* Phá vỡ mọi rào cản, cho chữ bung hết cỡ ngang */
-    width: 100% !important;
+    font-size: 1.1rem; /* Kích thước dễ đọc */
+    line-height: 1.6; /* Giãn dòng cho thoáng */
+    color: #777; /* Màu xám nhạt giống trong ảnh của bạn */
+    max-width: 480px; /* BÍ QUYẾT LÀ ĐÂY: Ép đoạn văn chỉ rộng tối đa 480px để nó tự rớt dòng giống hệt ảnh */
 }
 /* Cột chứa ảnh */
 .tech-split .feature-pic {
