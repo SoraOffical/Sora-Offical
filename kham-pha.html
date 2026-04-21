@@ -14,7 +14,14 @@
             --accent-pink: #E8B4B8;
             --button-dark: #1D1D1F;
         }
-
+/* Lệnh giúp mọi hình ảnh tự động vừa vặn với khung chứa nó */
+.anh-da-nang {
+    width: 100%;        /* Tự động bung rộng bằng mép khung */
+    height: 100%;       /* Tự động cao bằng mép khung */
+    object-fit: cover;  /* Phóng to và cắt cúp thông minh để không bị méo ảnh */
+    display: block;
+    border-radius: inherit; /* Tự động "bắt chước" độ bo góc của cái khung bên ngoài */
+}
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg-pastel-pink); color: var(--text-dark); line-height: 1.6; }
 
@@ -81,7 +88,7 @@
             <h2>Kiểm soát nhiệt 40 lần/giây</h2>
             <p>Ngăn ngừa hư tổn nhiệt tuyệt đối. Cảm biến thông minh giữ luồng gió luôn ở mức lý tưởng để bảo vệ biểu bì tóc.</p>
         </div>
-        <div class="tech-image">[ Ảnh máy sấy Sora ]</div>
+        <div class="tech-image"><img src="sora3.jpg" class="anh-da-nang" alt="Hình ảnh minh họa"></div>
     </section>
     <section class="tech-block">
         <div class="tech-text">
