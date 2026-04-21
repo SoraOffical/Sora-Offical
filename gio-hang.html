@@ -6,6 +6,24 @@
     <title>Giỏ hàng của bạn - Sora Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+/* Phục hồi nhan sắc cho nút Thanh toán an toàn */
+#openCheckoutBtn {
+    width: 100%; /* Tràn viền khung chứa */
+    background-color: #1a1a1a; /* Màu đen tuyền */
+    color: #ffffff; /* Chữ màu trắng */
+    padding: 16px; /* Bơm cho nút bự ra */
+    border: none; /* Xóa viền đen mặc định */
+    border-radius: 8px; /* Bo góc mượt mà */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu mượt */
+}
+
+/* Khi di chuột vào nút sẽ sáng lên một chút */
+#openCheckoutBtn:hover {
+    background-color: #333333;
+}
 /* Nền mờ đen phía sau Popup */
 .modal {
     display: none; /* Ẩn mặc định */
