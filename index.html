@@ -163,13 +163,35 @@
     background: transparent !important; /* Ép nền phải trong suốt hoàn toàn */
     box-shadow: none !important; /* Bỏ luôn bóng đổ của cái khung ngoài */
 }
-        /* Technology Split Section (Khối công nghệ) */
-        .tech-split {
-            display: flex;
-            align-items: center;
-            background-color: var(--bg-white);
-            padding: 0; /* Ảnh sát lề */
-        }
+   /* Khối công nghệ - Bố cục chuẩn */
+.tech-split {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Tự động đẩy chữ và ảnh sang 2 bên */
+    gap: 60px; /* Tạo khoảng trống 60px ở giữa để không bị dính chùm */
+    background-color: var(--bg-white);
+    max-width: 1100px; /* Giới hạn độ rộng để nhìn không bị loãng */
+    margin: 80px auto; /* Căn giữa trang web */
+    padding: 0 40px; /* Thêm một chút lề 2 bên cho khỏi sát viền màn hình */
+}
+/* Cột chứa chữ */
+.tech-split .tech-text {
+    flex: 1; /* Cho phép cột chữ giãn ra chiếm 1 nửa */
+}
+
+/* Cột chứa ảnh */
+.tech-split .feature-pic {
+    flex: 1; /* Cho phép cột ảnh chiếm 1 nửa còn lại */
+    text-align: center; /* Đảm bảo ảnh nằm giữa cái cột của nó */
+}
+
+/* Bo góc và làm nổi bật hình ảnh */
+.tech-split .feature-pic img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px; /* Bo góc ảnh cho mềm mại */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Đổ bóng nhẹ */
+}
 
         .tech-split:nth-child(even) {
             flex-direction: row-reverse;
@@ -332,22 +354,22 @@
                 <a href="#cửa-hàng" class="btn">Mua sắm ngay</a>
                 <a href="#công-nghệ" class="btn btn-outline">Khám phá công nghệ</a>
             </div>
-        <div class="hero-image">
-            <div class="tech-image">
- <<video src="sora-3d.mp4" autoplay loop muted playsinline style="width: 100%; height: auto; display: block; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); object-fit: cover; margin: 0; padding: 0;">
-</video>
+      <div class="tech-image">
+    <video src="sora-3d.mp4" autoplay loop muted playsinline style="width: 100%; height: auto; display: block; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.15);"></video>
+</div>
         </div>
     </section>
 
-    <section id="công-nghệ" class="tech-split">
-        <div class="tech-text">
-            <h2>Nhiệt độ thông minh.<br>Bảo vệ độ bóng tự nhiên.</h2>
-            <p>Cảm biến thông minh đo nhiệt độ luồng khí 40 lần mỗi giây, ngăn ngừa tổn thương do nhiệt độ quá cao. Giúp tóc luôn giữ được độ ẩm và màu sắc nhuộm.</p>
-        </div>
-        <div class="tech-image">
-            [ Ảnh macro cận cảnh luồng gió hoặc cảm biến máy sấy ]
-        </div>
-    </section>
+ <section id="công-nghệ" class="tech-split">
+    <div class="tech-text">
+        <h2>Nhiệt độ thông minh.<br>Bảo vệ độ bóng tự nhiên.</h2>
+        <p>Cảm biến thông minh đo nhiệt độ luồng khí 40 lần mỗi giây, ngăn ngừa tổn thương do nhiệt độ quá cao. Giúp tóc luôn giữ được độ ẩm và màu sắc nhuộm.</p>
+    </div>
+    
+    <div class="feature-pic">
+        <img src="sora-nd.jpg" alt="Cảm biến nhiệt độ">
+    </div>
+</section>
 
     <section class="tech-split">
         <div class="tech-text">
